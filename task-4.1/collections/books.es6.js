@@ -1,25 +1,12 @@
 import Book from '../models/book.es6.js';
+import Sortable from '../mixins/sortable.es6.js'
+import Filterable from '../mixins/filterable.es6.js'
 
 var Books = Backbone.Collection.extend({
-    model: Book,
-    runFilter: function (predicate) {
-        var models;
-        models = this.filter((item) => {
-            return JSON.stringify(item).toLowerCase().indexOf(predicate) != -1;
-        });
+    model: Book
+}).extend(Sortable).extend(Filterable);
 
-        return new Books(models);
-    },
-    runSort: function (byWhat, desc) {
-        var models;
-
-        models = this.sortBy(byWhat);
-        if(desc) {
-            models = models.reverse();
-        }
-
-        return new Books(models);
-    }
-});
+// alternatively using the underscore library
+// _.extend(Books.prototype, Sortable);
 
 export default Books;
