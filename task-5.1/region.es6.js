@@ -11,7 +11,7 @@ Region.prototype.clear = function() {
 
 Region.prototype.set = function(view) {
     this.clear();
-    view.setElement(this.rootElement);
+    view.setElement(this.$el);
     view.render();
 };
 

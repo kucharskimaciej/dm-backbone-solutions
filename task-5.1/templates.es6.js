@@ -25,6 +25,14 @@ JST['form'] = _.template(`
   </div>
 </form>
 `);
+
+JST['layout'] = _.template(`
+<div class="row">
+    <div class="col-sm-6" books></div>
+    <div class="col-sm-6" cart></div>
+</div>
+`);
+
 JST['books'] = _.template(`
 <div class="row">
     <h2 class="col-sm-12">

@@ -2,10 +2,12 @@ import Region from './region.es6.js';
 
 import BookStore from './stores/books.es6.js';
 import UserStore from './stores/users.es6.js';
+import CartStore from './stores/cart.es6.js';
 
+import Layout from './views/layout.es6.js';
 import BooksView from './views/books.es6.js';
 import UserForm from './views/user_form.s6.js';
-
+import CartView from './views/cart.es6.js';
 
 var routes, indexHandler, customerHandler, region;
 
@@ -19,23 +21,30 @@ routes = {
 indexHandler = function() {
     var books = BookStore.all();
     books.fetch().then(function() {
-        var view = new BooksView({
-            collection: books,
-            el: "#root"
+        var layout = new Layout();
+        region.set(layout);
+
+        var bookView = new BooksView({
+            collection: books
         });
 
-        Region.set(view);
+        var cartView = new CartView({
+            collection: CartStore.all()
+        });
+
+        layout.booksRegion.set(bookView);
+        layout.cartRegion.set(cartView);
+
     });
 };
 
 customerHandler = function() {
     var users = UserStore.all();
     var view = new UserForm({
-        collection: users,
-        el: "#root"
+        collection: users
     });
 
-    Region.set(view);
+    region.set(view);
 };
 
 var ApplicationRouter = Backbone.Router
