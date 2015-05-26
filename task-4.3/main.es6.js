@@ -41,7 +41,9 @@ var cartView = new CartView({
 });
 
 Bus.on("cart:add", function(model) {
-    cart.add(model);
+    // allow duplicate models in cart by removing the id
+    var dupe = _.omit(model.toJSON(), "id");
+    cart.add(dupe);
 });
 
 Bus.on("cart:remove", function(model) {

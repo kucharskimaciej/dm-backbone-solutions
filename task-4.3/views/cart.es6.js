@@ -5,7 +5,6 @@ export default Backbone.View.extend({
     el: '#cart',
     template: cart,
     initialize: function () {
-        console.log('here')
         this.render();
         this.listenTo(this.collection, "add remove", this.render, this);
     },
