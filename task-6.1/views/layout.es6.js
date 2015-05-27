@@ -1,4 +1,3 @@
-import Region from '../region.es6.js';
 import {layout} from '../templates.es6.js';
 
 var LayoutView = Marionette.LayoutView.extend({
