@@ -2,9 +2,9 @@ var FormView = Marionette.ItemView.extend({
 
     triggers: {
         'submit' : 'submit',
-        'keyup' : 'keyup'
+        'keyup' : 'run:validation'
     },
-    runValidation: function () {
+    onRunValidation: function () {
         this.clearErrors();
         var model = new this.collection.model(Backbone.Syphon.serialize(this));
         var errors = model.validate();
@@ -30,10 +30,8 @@ var FormView = Marionette.ItemView.extend({
                 .append(help)
         });
     },
-    onSubmit: function (ev) {
-        ev.preventDefault();
-
-        if(!this.runValidation()) return;
+    onSubmit: function () {
+        if(!this.onRunValidation()) return;
 
         var attrs = Backbone.Syphon.serialize(this);
 
